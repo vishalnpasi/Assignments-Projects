@@ -47,12 +47,12 @@ const getStudent = async function(req,res){
 
         if(subject) findData['subject'] = subject
         
-        let students = await studentModel.find(findData)
+        let students = await studentModel.find(findData,{_id:0,studentName:1,subject:1,marks:1})
 
         if(students.length==0)
             return res.status(400).send({status:false,massage:'Data Not Found by Given details'})  
 
-        return res.status(200).send({status:false,massage:'Students Data',data:students})    
+        return res.status(200).send({status:true , massage:'Students Data',data:students})    
     }
     catch(err){
         return res.status(500).send({status:false,massage:err.massage})
